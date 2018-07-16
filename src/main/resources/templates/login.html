@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login</title>
+</head>
+<body>
+<form action="authenticate" method="post">
+    <div class="input_form">
+        <label for="email">email
+            <input type="text" name="email" id="email">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="password">password
+            <input type="password" name="password" id="password">
+        </label>
+    </div>
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>
