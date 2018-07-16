@@ -2,6 +2,8 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 
+./src/main/resources/application.yml
+
 ### STS ###
 .apt_generated
 .classpath
@@ -24,3 +26,4 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
