@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+</head>
+<body>
+<form th:action="@{/users/create}" method="post">
+
+    <div class="input_form">
+        <label for="user.name">name
+            <input type="text" id="user.name">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="user.email">email
+            <input type="text" id="user.email">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="user.password">password
+            <input type="text" id="user.password">
+        </label>
+    </div>
+    <div class="input_form">password confirmation
+        <label for="user.confirmationPassword">
+            <input type="text" id="user.confirmationPassword">
+        </label>
+    </div>
+<button type="submit">Create</button>
+
+</form>
+</body>
+</html>
