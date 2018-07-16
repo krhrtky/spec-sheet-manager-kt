@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:a="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>New Project</title>
+</head>
+<body>
+<form th:action="@{/projects/create}" method="post">
+    <div class="input_form">
+        <label for="project.name">project name
+            <input type="text" id="project.name">
+        </label>
+    </div>
+    <div class="input_form">Date
+        <label for="project.startDate">
+            <Input type="date" id="project.startDate">
+        </label>〜
+        <label for="project.startDate">
+            <input type="date" id="project.endDate">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="project.language">language
+            <input type="text" id="project.language">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="project.framework">framework
+            <input type="text" id="project.framework">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="project.middleware">middleware
+            <input type="text" id="project.middleware">
+        </label>
+    </div>
+    <div class="input_form">
+        <label for="project.about">about
+            <textarea id="project.about"></textarea>
+        </label>
+    </div>
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
