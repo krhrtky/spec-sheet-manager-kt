@@ -4,10 +4,10 @@ import com.example.specsheetmanager.web.form.CreateUserForm
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import javax.validation.Valid
 
 @Controller
 @RequestMapping("users")
@@ -25,7 +25,7 @@ class UsersController {
 
     @PostMapping("/create")
     fun createUser(
-            @Valid
+            @Validated
             form: CreateUserForm,
             bindingResult: BindingResult,
             model: Model
