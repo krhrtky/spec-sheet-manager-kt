@@ -3,6 +3,7 @@ package com.example.specsheetmanager.web.form
 import javax.validation.constraints.Email
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.Size
 
 data class CreateUserForm(
         @get:NotBlank
@@ -10,8 +11,8 @@ data class CreateUserForm(
         @get:NotBlank
         @get:Email
         var email: String? = null,
-        @get:Min(4)
+        @get:Size(min = 5)
         var password: String? = null,
-        @get:Min(4)
+        @get:Size(min = 5)
         var confirmationPassword: String? = null
 )

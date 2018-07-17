@@ -5,38 +5,38 @@
     <title>New Project</title>
 </head>
 <body>
-<form th:action="@{/projects/create}" method="post">
+<form th:action="@{/projects/add}" method="post" th:object="${addProjectForm}">
     <div class="input_form">
-        <label for="project.name">project name
-            <input type="text" id="project.name">
+        <label>project name
+            <input type="text" th:field="*{name}">
         </label>
     </div>
     <div class="input_form">Date
-        <label for="project.startDate">
-            <Input type="date" id="project.startDate">
+        <label>
+            <input type="date" th:field="*{startDate}">
         </label>〜
-        <label for="project.startDate">
-            <input type="date" id="project.endDate">
+        <label>
+            <input type="date" th:field="*{endDate}">
         </label>
     </div>
     <div class="input_form">
-        <label for="project.language">language
-            <input type="text" id="project.language">
+        <label>language
+            <input type="text" th:field="*{language}">
         </label>
     </div>
     <div class="input_form">
-        <label for="project.framework">framework
-            <input type="text" id="project.framework">
+        <label>framework
+            <input type="text" th:field="*{framework}">
         </label>
     </div>
     <div class="input_form">
-        <label for="project.middleware">middleware
-            <input type="text" id="project.middleware">
+        <label>middleware
+            <input type="text" th:field="*{middleware}">
         </label>
     </div>
     <div class="input_form">
-        <label for="project.about">about
-            <textarea id="project.about"></textarea>
+        <label>about
+            <textarea th:field="*{about}"></textarea>
         </label>
     </div>
     <button type="submit">Add</button>
