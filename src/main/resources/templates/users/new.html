@@ -1,30 +1,31 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
 </head>
 <body>
-<form th:action="@{/users/create}" method="post">
+<form th:action="@{/users/create}" method="post" th:object="${createUserForm}">
 
     <div class="input_form">
-        <label for="user.name">name
-            <input type="text" id="user.name">
+        <label>name:
+            <input type="text" th:field="*{name}">
         </label>
     </div>
     <div class="input_form">
-        <label for="user.email">email
-            <input type="text" id="user.email">
+        <label>email:
+            <input type="text" th:field="*{email}">
         </label>
     </div>
     <div class="input_form">
-        <label for="user.password">password
-            <input type="text" id="user.password">
+        <label>password:
+            <input type="password" th:field="*{password}">
         </label>
     </div>
-    <div class="input_form">password confirmation
-        <label for="user.confirmationPassword">
-            <input type="text" id="user.confirmationPassword">
+    <div class="input_form">
+        <label>password confirmation:
+            <input type="password" th:field="*{confirmationPassword}">
         </label>
     </div>
 <button type="submit">Create</button>
