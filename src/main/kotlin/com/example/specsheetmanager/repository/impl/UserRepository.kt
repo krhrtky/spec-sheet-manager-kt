@@ -1,12 +1,12 @@
-package com.example.specsheetmanager.repository
+package com.example.specsheetmanager.repository.impl
 
 import com.example.specsheetmanager.domain.User
 import org.springframework.stereotype.Repository
 
 @Repository
-class UserRepository() {
+class UserRepositoryMock() {
 
     fun create(user: User) {
-        // TODO: insert処理を記述。 失敗はException
+
     }
 }
