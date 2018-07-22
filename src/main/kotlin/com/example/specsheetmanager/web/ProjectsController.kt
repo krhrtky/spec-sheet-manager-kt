@@ -1,8 +1,13 @@
 package com.example.specsheetmanager.web
 
+import com.example.specsheetmanager.domain.User
 import com.example.specsheetmanager.service.ProjectService
 import com.example.specsheetmanager.web.form.AddProjectForm
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.authentication.AccountStatusUserDetailsChecker
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -25,6 +30,14 @@ class ProjectsController(
 
     @RequestMapping("/new")
     fun new(): String {
+        val authentication: Authentication = SecurityContextHolder.getContext().authentication
+
+        val userUuid = if (authentication.principal is UserDetails) {
+            (authentication.principal as User).id
+        } else {
+            null
+        }
+
         return "projects/new"
     }
 
