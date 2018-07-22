@@ -7,4 +7,9 @@ import org.springframework.stereotype.Repository
 interface UserRepository {
 
     fun create(user: User)
+
+    fun findByEmail(email: String): User
+
+    fun findByEmailAndPassword(email: String, digestPassword: String): User
+
 }

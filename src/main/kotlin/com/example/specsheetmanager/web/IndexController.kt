@@ -1,12 +1,18 @@
 package com.example.specsheetmanager.web
 
+import com.example.specsheetmanager.web.form.LoginForm
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("/")
 class IndexController {
+
+    @ModelAttribute
+    fun setUpLoginForm(): LoginForm {
+        return LoginForm()
+    }
 
     @RequestMapping("/")
     fun index(): String {
@@ -18,8 +24,9 @@ class IndexController {
         return "login"
     }
 
-    @PostMapping("authenticate")
-    fun authenticate(): String {
+    @RequestMapping("top")
+    fun top(): String {
         return "top"
     }
 }
+

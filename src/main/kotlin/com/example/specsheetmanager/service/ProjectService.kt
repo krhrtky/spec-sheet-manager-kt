@@ -1,5 +1,6 @@
 package com.example.specsheetmanager.service
 
+import com.example.specsheetmanager.domain.Project
 import com.example.specsheetmanager.domain.convertToProjectFromForm
 import com.example.specsheetmanager.repository.ProjectRepository
 import com.example.specsheetmanager.web.form.AddProjectForm
@@ -19,4 +20,8 @@ class ProjectService(
                     false
                 }
         }
+
+    fun findProjectlist(userId: Int): List<Project> {
+        return projectRepository.findProjectList(userId)
+    }
 }

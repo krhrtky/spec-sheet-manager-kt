@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project List</title>
+</head>
+<body>
+<h1>Project List</h1>
+<table>
+    <tr th:each="project : ${projectList}">
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.startDate}"></td>
+        <td th:text="${project.endDate}"></td>
+        <td th:text="${project.language}"></td>
+        <td th:text="${project.framework}"></td>
+        <td th:text="${project.middleware}"></td>
+        <td th:text="${project.about}"></td>
+    </tr>
+</table>
+</body>
+</html>
