@@ -3,7 +3,7 @@ package com.example.specsheetmanager.web
 import com.example.specsheetmanager.domain.User
 import com.example.specsheetmanager.service.ProjectService
 import com.example.specsheetmanager.util.getSessionUser
-import com.example.specsheetmanager.web.form.AddProjectForm
+import com.example.specsheetmanager.web.form.ProjectForm
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("projects")
@@ -25,8 +22,8 @@ class ProjectsController(
 ) {
 
     @ModelAttribute
-    fun setUpProjectForm(): AddProjectForm {
-        return AddProjectForm()
+    fun setUpProjectForm(): ProjectForm {
+        return ProjectForm()
     }
 
     @RequestMapping("/new")
@@ -42,10 +39,10 @@ class ProjectsController(
         return "projects/new"
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     fun addProject(
             @Validated
-            form: AddProjectForm,
+            form: ProjectForm,
             bindingResult: BindingResult,
             model: Model
     ): String {
@@ -61,8 +58,42 @@ class ProjectsController(
     fun showProjects(model: Model): String {
         val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
 
-        model.addAttribute(projectService.findProjectlist(user.id!!))
+        model.addAttribute(projectService.findProjectList(user.id!!))
 
         return "/projects/list"
+    }
+
+    @GetMapping("/{id}")
+    fun show(@PathVariable id: Int, model: Model): String {
+
+        val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
+
+        model.addAttribute(projectService.findByUserIdProjectId(user.id!!, id))
+
+        return "/projects/detail"
+    }
+
+    @GetMapping("/{id}/edit")
+    fun editPage(@PathVariable id: Int, model: Model): String {
+
+        val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
+
+        model.addAttribute(projectService.findByUserIdProjectId(user.id!!, id))
+
+        return "/projects/edit"
+    }
+
+    @PostMapping("/edit")
+    fun edit(
+            @Validated
+            form: ProjectForm,
+            bindingResult: BindingResult,
+            model: Model
+    ): String {
+
+        if(bindingResult.hasErrors()) return "/projects/edit"
+        val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
+
+        return if(projectService.editProject(form, user.id!!)) "/projects/list" else "project/edit"
     }
 }

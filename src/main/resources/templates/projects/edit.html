@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Project</title>
+</head>
+<body>
+<h1>Edit Project</h1>
+<table>
+    <form th:action="${edit}" method="post" th:object="${project}">
+
+        <div class="input_form">
+            <label>project name
+                <input type="text" th:field="*{name}">
+            </label>
+        </div>
+        <div class="input_form">Date
+            <label>
+                <input type="date" th:field="*{startDate}">
+            </label>〜
+            <label>
+                <input type="date" th:field="*{endDate}">
+            </label>
+        </div>
+        <div class="input_form">
+            <label>language
+                <input type="text" th:field="*{language}">
+            </label>
+        </div>
+        <div class="input_form">
+            <label>framework
+                <input type="text" th:field="*{framework}">
+            </label>
+        </div>
+        <div class="input_form">
+            <label>middleware
+                <input type="text" th:field="*{middleware}">
+            </label>
+        </div>
+        <div class="input_form">
+            <label>about
+                <textarea th:field="*{about}"></textarea>
+            </label>
+        </div>
+        <input type="hidden" th:value="*{id}">
+        <input type="hidden" th:value="*{userId}">
+        <button type="submit">Edit</button>
+
+    </form>
+</table>
+</body>
+</html>

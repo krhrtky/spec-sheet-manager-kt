@@ -8,4 +8,8 @@ interface ProjectRepository {
     fun create(project: Project)
 
     fun findProjectList(userId: Int): List<Project>
+
+    fun findByUserIdAndProjectId(userId: Int, projectId: Int): Project
+
+    fun update(project: Project)
 }
