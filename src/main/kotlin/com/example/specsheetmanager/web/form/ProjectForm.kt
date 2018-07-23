@@ -3,7 +3,7 @@ package com.example.specsheetmanager.web.form
 import java.sql.Date
 import javax.validation.constraints.NotBlank
 
-data class AddProjectForm(
+data class ProjectForm(
         @NotBlank
         var name: String? = null,
         @NotBlank

@@ -10,8 +10,15 @@
 <body>
 <h1>Project List</h1>
 <table>
-    <tr th:each="project : ${projectList}">
-        <td><a th:href="@{{id}(id=${project.id})}">[[${project.name}]]</a></td>
+    <tr>
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.startDate}"></td>
+        <td th:text="${project.endDate}"></td>
+        <td th:text="${project.language}"></td>
+        <td th:text="${project.framework}"></td>
+        <td th:text="${project.middleware}"></td>
+        <td th:text="${project.about}"></td>
+        <td><a th:href="@{{id}/edit(id=${project.id})}">edit</a></td>
     </tr>
 </table>
 </body>

@@ -2,6 +2,7 @@ package com.example.specsheetmanager.repository.mock
 
 import com.example.specsheetmanager.domain.Project
 import com.example.specsheetmanager.repository.ProjectRepository
+import com.example.specsheetmanager.util.getSessionUser
 import org.springframework.stereotype.Repository
 import java.util.*
 
@@ -28,4 +29,23 @@ class ProjectRepositoryMock: ProjectRepository {
                 ) }
                 .toList()
     }
+
+    override fun findByUserIdAndProjectId(userId: Int, projectId: Int): Project {
+
+        return Project(
+                projectId,
+                "project${projectId.toString()}",
+                Date(),
+                Date(),
+                "java",
+                "spring",
+                "mysql",
+                "test_project_${projectId.toString()}",
+                userId
+        )
+    }
+
+    override fun update(project: Project) {
+    }
+
 }

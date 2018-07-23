@@ -1,6 +1,6 @@
 package com.example.specsheetmanager.domain
 
-import com.example.specsheetmanager.web.form.AddProjectForm
+import com.example.specsheetmanager.web.form.ProjectForm
 import java.util.Date
 
 data class Project(
@@ -15,7 +15,7 @@ data class Project(
         val userId: Int
 )
 
-fun convertToProjectFromForm(form: AddProjectForm, userId: Int): Project {
+fun convertToProjectFromForm(form: ProjectForm, userId: Int): Project {
     val (
     name,
     startDate,
