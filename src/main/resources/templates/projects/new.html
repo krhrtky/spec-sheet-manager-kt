@@ -5,7 +5,7 @@
     <title>New Project</title>
 </head>
 <body>
-<form th:action="@{/projects/add}" method="post" th:object="${projectForm}">
+<form th:action="@{/projects/add}" method="post" th:object="${addProjectForm}">
     <div class="input_form">
         <label>project name
             <input type="text" th:field="*{name}">
@@ -13,10 +13,10 @@
     </div>
     <div class="input_form">Date
         <label>
-            <input type="date" th:field="*{startDate}">
+            <input type="text" id="startDate" name="startDate" th:value="${#dates.format(addProjectForm.startDate, 'yyyy/MM/dd')}">
         </label>〜
         <label>
-            <input type="date" th:field="*{endDate}">
+            <input type="text" id="endDate" name="endDate" th:value="${#dates.format(addProjectForm.endDate, 'yyyy/MM/dd')}">
         </label>
     </div>
     <div class="input_form">

@@ -1,6 +1,7 @@
 package com.example.specsheetmanager.domain
 
-import com.example.specsheetmanager.web.form.ProjectForm
+import com.example.specsheetmanager.web.form.AddProjectForm
+import com.example.specsheetmanager.web.form.EditProjectForm
 import java.util.Date
 
 data class Project(
@@ -13,28 +14,56 @@ data class Project(
         val middleware: String,
         val about: String,
         val userId: Int
-)
+) {
 
-fun convertToProjectFromForm(form: ProjectForm, userId: Int): Project {
-    val (
-    name,
-    startDate,
-    endDate,
-    language,
-    framework,
-    middleware,
-    about
-    ) = form
+    companion object {
+        fun convertFromAddForm(form: AddProjectForm, userId: Int): Project {
+            val (
+                    name,
+                    startDate,
+                    endDate,
+                    language,
+                    framework,
+                    middleware,
+                    about
+            ) = form
 
-    return Project(
-            null,
-            name?: "",
-            startDate?: Date(),
-            endDate?: Date(),
-            language?: "",
-            framework?: "",
-            middleware?: "",
-            about?: "",
-            userId
-    )
+            return Project(
+                    null,
+                    name?: "",
+                    startDate?: Date(),
+                    endDate?: Date(),
+                    language?: "",
+                    framework?: "",
+                    middleware?: "",
+                    about?: "",
+                    userId
+            )
+        }
+
+        fun convertFromEdit(form: EditProjectForm, userId: Int): Project {
+            val (
+                    id,
+                    name,
+                    startDate,
+                    endDate,
+                    language,
+                    framework,
+                    middleware,
+                    about
+            ) = form
+
+            return Project(
+                    null,
+                    name?: "",
+                    startDate?: Date(),
+                    endDate?: Date(),
+                    language?: "",
+                    framework?: "",
+                    middleware?: "",
+                    about?: "",
+                    userId
+            )
+        }
+    }
 }
