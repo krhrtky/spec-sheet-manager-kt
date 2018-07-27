@@ -9,47 +9,43 @@
 </head>
 <body>
 <h1>Edit Project</h1>
-<table>
-    <form th:action="${edit}" method="post" th:object="${project}">
+<form th:action="@{edit}" method="post" th:object="${project}">
+    <input type="hidden" id="id" name="id" th:value="*{id}">
+    <div class="input_form">
+        <label>project name
+            <input type="text" th:field="*{name}">
+        </label>
+    </div>
+    <div class="input_form">Date
+        <label>
+            <input type="text" id="startDate" name="startDate" th:value="${#dates.format(project.startDate, 'yyyy/MM/dd')}">
+        </label>〜
+        <label>
+            <input type="text" id="endDate" name="endDate" th:value="${#dates.format(project.endDate, 'yyyy/MM/dd')}">
+        </label>
+    </div>
+    <div class="input_form">
+        <label>language
+            <input type="text" th:field="*{language}">
+        </label>
+    </div>
+    <div class="input_form">
+        <label>framework
+            <input type="text" th:field="*{framework}">
+        </label>
+    </div>
+    <div class="input_form">
+        <label>middleware
+            <input type="text" th:field="*{middleware}">
+        </label>
+    </div>
+    <div class="input_form">
+        <label>about
+            <textarea th:field="*{about}"></textarea>
+        </label>
+    </div>
+    <button type="submit">Edit</button>
 
-        <div class="input_form">
-            <label>project name
-                <input type="text" th:field="*{name}">
-            </label>
-        </div>
-        <div class="input_form">Date
-            <label>
-                <input type="date" th:field="*{startDate}">
-            </label>〜
-            <label>
-                <input type="date" th:field="*{endDate}">
-            </label>
-        </div>
-        <div class="input_form">
-            <label>language
-                <input type="text" th:field="*{language}">
-            </label>
-        </div>
-        <div class="input_form">
-            <label>framework
-                <input type="text" th:field="*{framework}">
-            </label>
-        </div>
-        <div class="input_form">
-            <label>middleware
-                <input type="text" th:field="*{middleware}">
-            </label>
-        </div>
-        <div class="input_form">
-            <label>about
-                <textarea th:field="*{about}"></textarea>
-            </label>
-        </div>
-        <input type="hidden" th:value="*{id}">
-        <input type="hidden" th:value="*{userId}">
-        <button type="submit">Edit</button>
-
-    </form>
-</table>
+</form>
 </body>
 </html>

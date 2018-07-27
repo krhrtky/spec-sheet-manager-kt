@@ -1,6 +1,6 @@
 package com.example.specsheetmanager.service
 
-import com.example.specsheetmanager.domain.convertToUserFromForm
+import com.example.specsheetmanager.domain.User
 import com.example.specsheetmanager.repository.UserRepository
 import com.example.specsheetmanager.web.form.CreateUserForm
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +15,7 @@ class UsersService(
     fun createUser(form: CreateUserForm): Boolean {
 
         return try {
-            userRepository.create(convertToUserFromForm(form))
+            userRepository.create(User.convertFromCreateForm(form))
             true
         } catch (e: Exception) {
             false

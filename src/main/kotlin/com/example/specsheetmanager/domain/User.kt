@@ -43,19 +43,23 @@ data class User(
         override fun isAccountNonLocked(): Boolean {
             return true
         }
+
+    companion object {
+        fun convertFromCreateForm(form: CreateUserForm): User {
+            val (name, email, password) = form
+
+            val digestPassword = if (password.isNullOrBlank())
+                throw NullPointerException()
+            else DigestUtils.md5DigestAsHex(password!!.toByteArray())
+
+            return User(
+                    null ,
+                    name?: "",
+                    email?: "",
+                    digestPassword
+            )
+
+        }
+    }
 }
 
-fun convertToUserFromForm(form: CreateUserForm): User {
-    val (name, email, password) = form
-
-    val digestPassword = if (password.isNullOrBlank())
-        throw NullPointerException()
-    else DigestUtils.md5DigestAsHex(password!!.toByteArray())
-
-    return User(
-            null ,
-            name?: "",
-            email?: "",
-            digestPassword
-    )
-}

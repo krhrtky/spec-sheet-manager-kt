@@ -12,12 +12,26 @@
 <table>
     <tr>
         <td th:text="${project.name}"></td>
-        <td th:text="${project.startDate}"></td>
-        <td th:text="${project.endDate}"></td>
+    </tr>
+    <tr>
+        <td th:text=="${#dates.format(project.startDate, 'yyyy/MM/dd')}"></td>
+    </tr>
+    <tr>
+        <td th:text=="${#dates.format(project.endDate, 'yyyy/MM/dd')}"></td>
+    </tr>
+    <tr>
         <td th:text="${project.language}"></td>
+    </tr>
+    <tr>
         <td th:text="${project.framework}"></td>
+    </tr>
+    <tr>
         <td th:text="${project.middleware}"></td>
+    </tr>
+    <tr>
         <td th:text="${project.about}"></td>
+    </tr>
+    <tr>
         <td><a th:href="@{{id}/edit(id=${project.id})}">edit</a></td>
     </tr>
 </table>
