@@ -19,14 +19,10 @@ class UsersController(
 ) {
 
     @ModelAttribute
-    fun setUpCreateUserForm(): CreateUserForm {
-        return CreateUserForm()
-    }
+    fun setUpCreateUserForm(): CreateUserForm = CreateUserForm()
 
     @RequestMapping("/new")
-    fun new(): String {
-        return "users/new"
-    }
+    fun new(): String = "users/new"
 
     @PostMapping("/create")
     fun createUser(
@@ -37,7 +33,7 @@ class UsersController(
     ): String {
 
         if (bindingResult.hasErrors()) return "users/new"
-        return if (usersService.createUser(form)) "./top" else "users/new"
 
+        return if (usersService.createUser(form)) "./top" else "users/new"
     }
 }
