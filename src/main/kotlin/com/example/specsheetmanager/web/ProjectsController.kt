@@ -20,15 +20,11 @@ class ProjectsController(
 ) {
 
     @ModelAttribute
-    fun setUpProjectForm(): AddProjectForm {
-        return AddProjectForm()
-    }
+    fun setUpProjectForm(): AddProjectForm = AddProjectForm()
+
 
     @RequestMapping("/new")
-    fun new(): String {
-
-        return "projects/new"
-    }
+    fun new(): String = "projects/new"
 
     @PostMapping("/add")
     fun addProject(

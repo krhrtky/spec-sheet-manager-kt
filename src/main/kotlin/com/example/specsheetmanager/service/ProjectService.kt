@@ -12,30 +12,23 @@ class ProjectService(
         @Autowired
         private val projectRepository: ProjectRepository
 ) {
-    fun insertProject(form: AddProjectForm, userId: Int): Boolean {
-        return try {
-            projectRepository.create(Project.convertFromAddForm(form, userId))
-            true
-        } catch (e: Exception) {
-            false
-        }
+    fun insertProject(form: AddProjectForm, userId: Int): Boolean = try {
+        projectRepository.create(Project.convertFromAddForm(form, userId))
+        true
+
+    } catch (e: Exception) {
+        false
     }
 
-    fun findProjectList(userId: Int): List<Project> {
-        return projectRepository.findProjectList(userId)
-    }
+    fun findProjectList(userId: Int): List<Project> = projectRepository.findProjectList(userId)
 
-    fun findByUserIdProjectId(userId: Int, projectId: Int): Project {
-        return projectRepository.findByUserIdAndProjectId(userId, projectId)
-    }
+    fun findByUserIdProjectId(userId: Int, projectId: Int): Project = projectRepository.findByUserIdAndProjectId(userId, projectId)
 
-    fun editProject(form: EditProjectForm, userId: Int): Boolean {
-        return try {
-            projectRepository.update(Project.convertFromEdit(form, userId))
-            true
-        } catch (e: Exception) {
-            false
-        }
+    fun editProject(form: EditProjectForm, userId: Int): Boolean = try {
+        projectRepository.update(Project.convertFromEdit(form, userId))
+        true
 
+    } catch (e: Exception) {
+        false
     }
 }

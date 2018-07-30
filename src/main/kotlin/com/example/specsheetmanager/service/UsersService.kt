@@ -12,13 +12,12 @@ class UsersService(
         val userRepository: UserRepository
 ) {
 
-    fun createUser(form: CreateUserForm): Boolean {
+    fun createUser(form: CreateUserForm): Boolean = try {
+        userRepository.create(User.convertFromCreateForm(form))
+        true
 
-        return try {
-            userRepository.create(User.convertFromCreateForm(form))
-            true
-        } catch (e: Exception) {
-            false
-        }
+    } catch (e: Exception) {
+        false
     }
+
 }
