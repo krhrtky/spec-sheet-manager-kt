@@ -3,16 +3,30 @@ package com.example.specsheetmanager.domain
 import com.example.specsheetmanager.web.form.AddProjectForm
 import com.example.specsheetmanager.web.form.EditProjectForm
 import java.util.Date
+import javax.persistence.*
 
+@Entity
+@Table
 data class Project(
+        @Id
+        @GeneratedValue()
+        @Column(name = "id")
         val id: Int?,
+        @Column(name = "name")
         val name: String,
+        @Column(name = "start_date")
         val startDate: Date,
+        @Column(name = "end_date")
         val endDate: Date,
+        @Column(name = "language")
         val language: String,
+        @Column(name = "framework")
         val framework: String,
+        @Column(name = "middleware")
         val middleware: String,
+        @Column(name = "about")
         val about: String,
+        @Column(name = "user_id")
         val userId: Int
 ) {
 
