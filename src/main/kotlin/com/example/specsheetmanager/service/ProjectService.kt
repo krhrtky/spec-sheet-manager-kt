@@ -13,19 +13,19 @@ class ProjectService(
         private val projectRepository: ProjectRepository
 ) {
     fun insertProject(form: AddProjectForm, userId: Int): Boolean = try {
-        projectRepository.create(Project.convertFromAddForm(form, userId))
+        projectRepository.save(Project.convertFromAddForm(form, userId))
         true
 
     } catch (e: Exception) {
         false
     }
 
-    fun findProjectList(userId: Int): List<Project> = projectRepository.findProjectList(userId)
+    fun findProjectList(userId: Int): List<Project> = projectRepository.findByUserId(userId)
 
-    fun findByUserIdProjectId(userId: Int, projectId: Int): Project = projectRepository.findByUserIdAndProjectId(userId, projectId)
+    fun findByUserIdProjectId(userId: Int, projectId: Int): Project = projectRepository.findByUserIdAndId(userId, projectId)
 
     fun editProject(form: EditProjectForm, userId: Int): Boolean = try {
-        projectRepository.update(Project.convertFromEdit(form, userId))
+        projectRepository.save(Project.convertFromEdit(form, userId))
         true
 
     } catch (e: Exception) {
