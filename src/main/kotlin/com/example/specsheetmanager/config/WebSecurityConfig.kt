@@ -39,7 +39,7 @@ class WebSecurityConfig(
     override fun configure(http: HttpSecurity?) {
         http
                 ?.authorizeRequests()
-                ?.antMatchers("/", "/login", "/users/new", "/authenticate")
+                ?.antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
                 ?.permitAll()
                 ?.anyRequest()
                 ?.authenticated()
@@ -49,7 +49,7 @@ class WebSecurityConfig(
                 ?.loginProcessingUrl("/authenticate")
                 ?.loginPage("/login")
                 ?.failureUrl("/login")
-                ?.successForwardUrl("/top")
+                ?.defaultSuccessUrl("/top", true)
                 ?.usernameParameter("email")
                 ?.passwordParameter("password")
                 ?.and()
