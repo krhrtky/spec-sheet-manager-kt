@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service
 @Service
 class UsersService(
         @Autowired
-        val userRepository: UserRepository
+        private val userRepository: UserRepository
 ) {
 
     fun createUser(form: CreateUserForm): Boolean = try {
-        userRepository.create(User.convertFromCreateForm(form))
+        userRepository.save(User.convertFromCreateForm(form))
         true
 
     } catch (e: Exception) {
+        e.printStackTrace()
         false
     }
 

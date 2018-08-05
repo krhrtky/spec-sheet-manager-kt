@@ -3,17 +3,31 @@ package com.example.specsheetmanager.domain
 import com.example.specsheetmanager.web.form.AddProjectForm
 import com.example.specsheetmanager.web.form.EditProjectForm
 import java.util.Date
+import javax.persistence.*
 
+@Entity
+@Table
 data class Project(
-        val id: Int?,
-        val name: String,
-        val startDate: Date,
-        val endDate: Date,
-        val language: String,
-        val framework: String,
-        val middleware: String,
-        val about: String,
-        val userId: Int
+        @Id
+        @GeneratedValue()
+        @Column(name = "id")
+        val id: Int? = null,
+        @Column(name = "name")
+        val name: String = "",
+        @Column(name = "start_date")
+        val startDate: Date = Date(),
+        @Column(name = "end_date")
+        val endDate: Date = Date(),
+        @Column(name = "language")
+        val language: String = "",
+        @Column(name = "framework")
+        val framework: String = "",
+        @Column(name = "middleware")
+        val middleware: String = "",
+        @Column(name = "about")
+        val about: String = "",
+        @Column(name = "user_id")
+        val userId: Int = 0
 ) {
 
     companion object {
@@ -54,7 +68,7 @@ data class Project(
             ) = form
 
             return Project(
-                    null,
+                    id!!,
                     name?: "",
                     startDate?: Date(),
                     endDate?: Date(),
