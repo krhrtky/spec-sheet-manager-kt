@@ -38,7 +38,7 @@ class ProjectsController(
 
         val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
 
-        return if(projectService.insertProject(form, user.id!!)) showProjects(model) else "project/new"
+        return if(projectService.insertProject(form, user.id!!)) showProjects(model) else "projects/new"
     }
 
     @GetMapping("/")
@@ -80,8 +80,8 @@ class ProjectsController(
 
         val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
 
-        if(bindingResult.hasErrors()) return "/projects/edit"
+        if(bindingResult.hasErrors()) return "/projects/{id}/edit"
 
-        return if(projectService.editProject(form, user.id!!)) showProjects(model) else "project/edit"
+        return if(projectService.editProject(form, user.id!!)) "redirect:/projects/" else "projects/{id}/edit"
     }
 }
