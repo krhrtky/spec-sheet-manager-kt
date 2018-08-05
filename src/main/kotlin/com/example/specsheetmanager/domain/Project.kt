@@ -11,23 +11,23 @@ data class Project(
         @Id
         @GeneratedValue()
         @Column(name = "id")
-        val id: Int?,
+        val id: Int? = null,
         @Column(name = "name")
-        val name: String,
+        val name: String = "",
         @Column(name = "start_date")
-        val startDate: Date,
+        val startDate: Date = Date(),
         @Column(name = "end_date")
-        val endDate: Date,
+        val endDate: Date = Date(),
         @Column(name = "language")
-        val language: String,
+        val language: String = "",
         @Column(name = "framework")
-        val framework: String,
+        val framework: String = "",
         @Column(name = "middleware")
-        val middleware: String,
+        val middleware: String = "",
         @Column(name = "about")
-        val about: String,
+        val about: String = "",
         @Column(name = "user_id")
-        val userId: Int
+        val userId: Int = 0
 ) {
 
     companion object {
@@ -68,7 +68,7 @@ data class Project(
             ) = form
 
             return Project(
-                    null,
+                    id!!,
                     name?: "",
                     startDate?: Date(),
                     endDate?: Date(),
