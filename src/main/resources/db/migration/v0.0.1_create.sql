@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS project (
   framework VARCHAR(255) NOT NULL,
   middleware VARCHAR(255) NOT NULL,
   about VARCHAR(255) NOT NULL,
-  usr_id INT(11) NOT NULL
+  user_id INT(11) NOT NULL
 );
