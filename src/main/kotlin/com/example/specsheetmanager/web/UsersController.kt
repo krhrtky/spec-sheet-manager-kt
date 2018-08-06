@@ -48,7 +48,7 @@ class UsersController(
 
         val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
 
-        model.addAttribute(user)
+        model.addAttribute("user", user)
 
         return "/users/edit"
     }
@@ -65,7 +65,7 @@ class UsersController(
 
         if(bindingResult.hasErrors()) return "users/edit"
 
-        return if (usersService.updateUser(form, user.id!!)) "redirect:/top" else "redirect:/users/edit"
+        return if (usersService.updateUser(form, user.id!!)) "redirect:/top" else "/users/edit"
     }
 
 }
