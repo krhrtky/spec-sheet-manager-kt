@@ -3,11 +3,10 @@
       xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Create User</title>
+    <title>Edit User Info</title>
 </head>
 <body>
-<form th:action="@{/users/create}" method="post" th:object="${createUserForm}">
-
+<form th:action="@{/users/edit}" method="post" th:object="${user}">
     <div class="input_form">
         <label>name:
             <input type="text" th:field="*{name}">
@@ -16,16 +15,6 @@
     <div class="input_form">
         <label>email:
             <input type="text" th:field="*{email}">
-        </label>
-    </div>
-    <div class="input_form">
-        <label>password:
-            <input type="password" th:field="*{password}">
-        </label>
-    </div>
-    <div class="input_form">
-        <label>password confirmation:
-            <input type="password" th:field="*{confirmationPassword}">
         </label>
     </div>
     <button type="submit">Create</button>
