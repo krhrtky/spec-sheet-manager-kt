@@ -31,4 +31,6 @@ class ProjectService(
     } catch (e: Exception) {
         false
     }
+
+    fun findByUserIdAndIdIn(userId:Int, id: List<Int>): List<Project> = projectRepository.findByUserIdAndIdIn(userId, id)
 }

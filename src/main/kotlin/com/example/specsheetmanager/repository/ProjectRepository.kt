@@ -11,4 +11,6 @@ interface ProjectRepository: JpaRepository<Project, Int> {
 
     fun findByUserIdAndId(userId: Int, projectId: Int): Project
 
+    fun findByUserIdAndIdIn(userId:Int, id: List<Int>): List<Project>
+
 }
