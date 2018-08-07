@@ -5,6 +5,7 @@ import com.example.specsheetmanager.service.ProjectService
 import com.example.specsheetmanager.util.getSessionUser
 import com.example.specsheetmanager.web.form.AddProjectForm
 import com.example.specsheetmanager.web.form.EditProjectForm
+import com.example.specsheetmanager.web.form.PrintTargetProjectForm
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -13,7 +14,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 @Controller
-@RequestMapping("projects")
+@RequestMapping("/projects")
 class ProjectsController(
         @Autowired
         private val projectService: ProjectService
@@ -22,6 +23,8 @@ class ProjectsController(
     @ModelAttribute
     fun setUpProjectForm(): AddProjectForm = AddProjectForm()
 
+    @ModelAttribute
+    fun setUpPrintProjectForm(): PrintTargetProjectForm = PrintTargetProjectForm()
 
     @RequestMapping("/new")
     fun new(): String = "projects/new"
@@ -41,7 +44,7 @@ class ProjectsController(
         return if(projectService.insertProject(form, user.id!!)) showProjects(model) else "projects/new"
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     fun showProjects(model: Model): String {
         val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
 
@@ -83,5 +86,21 @@ class ProjectsController(
         if(bindingResult.hasErrors()) return "/projects/{id}/edit"
 
         return if(projectService.editProject(form, user.id!!)) "redirect:/projects/" else "projects/{id}/edit"
+    }
+
+    @PostMapping("/print")
+    fun print(
+            form: PrintTargetProjectForm,
+            model: Model
+    ): String {
+
+        if (form.printTargetProjectIdList.isEmpty()) return "/projects/list"
+
+        val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
+
+        model.addAttribute(user)
+        model.addAttribute(projectService.findByUserIdAndIdIn(user.id!!, form.printTargetProjectIdList.toList()))
+
+        return "/projects/print"
     }
 }

@@ -9,10 +9,14 @@
 </head>
 <body>
 <h1>Project List</h1>
-<table>
-    <tr th:each="project : ${projectList}">
-        <td><a th:href="@{{id}(id=${project.id})}">[[${project.name}]]</a></td>
-    </tr>
-</table>
+<form th:action="@{/projects/print}" method="POST">
+    <table>
+        <tr th:each="project : ${projectList}">
+            <td><input type="checkbox" name="printTargetProjectIdList" th:value="${project.id}"></td>
+            <td><a th:href="@{{id}(id=${project.id})}">[[${project.name}]]</a></td>
+        </tr>
+    </table>
+    <button type="submit">Print</button>
+</form>
 </body>
 </html>
