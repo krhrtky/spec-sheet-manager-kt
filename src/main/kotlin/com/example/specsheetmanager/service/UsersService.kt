@@ -7,6 +7,8 @@ import com.example.specsheetmanager.web.form.EditUserForm
 import com.fasterxml.jackson.databind.util.BeanUtil
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository
+import org.springframework.security.web.context.SecurityContextRepository
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.persistence.EntityNotFoundException
@@ -28,7 +30,7 @@ class UsersService(
 
     fun updateUser(form: EditUserForm, userId: Int): Boolean = try {
         val currentUser = userRepository.findById(userId).orElse(null) ?: throw EntityNotFoundException()
-        BeanUtils.copyProperties(currentUser, form)
+        BeanUtils.copyProperties(form, currentUser)
         userRepository.save(currentUser)
         true
 
