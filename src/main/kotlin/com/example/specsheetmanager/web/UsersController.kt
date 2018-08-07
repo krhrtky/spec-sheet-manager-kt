@@ -53,6 +53,7 @@ class UsersController(
         return "/users/edit"
     }
 
+    // FIXME: session内の認可情報も変更できるようにする.
     @PostMapping("/edit")
     fun editUser(
             @Validated
