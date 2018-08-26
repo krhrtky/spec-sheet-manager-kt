@@ -36,34 +36,34 @@ class WebSecurityConfig(
                 )
     }
 
-    override fun configure(http: HttpSecurity?) {
+    override fun configure(http: HttpSecurity) {
         http
-                ?.authorizeRequests()
-                ?.antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
-                ?.permitAll()
-                ?.anyRequest()
-                ?.authenticated()
+                .authorizeRequests()
+                .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
 
         http
-                ?.formLogin()
-                ?.loginProcessingUrl("/authenticate")
-                ?.loginPage("/login")
-                ?.failureUrl("/login")
-                ?.defaultSuccessUrl("/top", true)
-                ?.usernameParameter("email")
-                ?.passwordParameter("password")
-                ?.and()
+                .formLogin()
+                .loginProcessingUrl("/authenticate")
+                .loginPage("/login")
+                .failureUrl("/login")
+                .defaultSuccessUrl("/top", true)
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .and()
 
         http
-                ?.logout()
-                ?.logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
-                ?.logoutSuccessUrl("/")
+                .logout()
+                .logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
+                .logoutSuccessUrl("/")
     }
 
-    override fun configure(auth: AuthenticationManagerBuilder?) {
+    override fun configure(auth: AuthenticationManagerBuilder) {
         auth
-                ?.userDetailsService(LoginService(userRepository))
-                ?.passwordEncoder(passwordEncoder)
+                .userDetailsService(LoginService(userRepository))
+                .passwordEncoder(passwordEncoder)
     }
 
     @Configuration
@@ -73,9 +73,10 @@ class WebSecurityConfig(
     ) : GlobalAuthenticationConfigurerAdapter() {
 
         @Throws(Exception::class)
-        override fun init(auth: AuthenticationManagerBuilder?) {
-            auth!!.userDetailsService<UserDetailsService>(userDetailsService)
-                    .passwordEncoder(BCryptPasswordEncoder())
+        override fun init(auth: AuthenticationManagerBuilder) {
+            auth
+              .userDetailsService<UserDetailsService>(userDetailsService)
+              .passwordEncoder(BCryptPasswordEncoder())
 
         }
     }
