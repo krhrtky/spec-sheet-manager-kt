@@ -23,6 +23,8 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
+      <router-link to="/">home</router-link>
+      <router-link to="/about">about</router-link>
     </v-navigation-drawer>
     <v-toolbar
       app
@@ -45,7 +47,7 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <HelloWorld/>
+      <router-view/>
     </v-content>
     <v-navigation-drawer
       temporary
@@ -69,25 +71,19 @@
   </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld';
+<script lang="ts">
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
-  data() {
+  data () {
     return {
       clipped: false,
       drawer: true,
       fixed: false,
-      items: [
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire'
-        }
-      ],
+      items: [{
+        icon: 'bubble_chart',
+        title: 'Inspire'
+      }],
       miniVariant: false,
       right: true,
       rightDrawer: false,
