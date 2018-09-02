@@ -19,65 +19,65 @@ import org.springframework.security.core.userdetails.UserDetailsService
 @Configuration
 @EnableWebSecurity
 class WebSecurityConfig(
-        @Autowired
-        private val userRepository: UserRepository,
-        @Autowired
-        private val passwordEncoder: PasswordEncoder
+  @Autowired
+  private val userRepository: UserRepository,
+  @Autowired
+  private val passwordEncoder: PasswordEncoder
 ): WebSecurityConfigurerAdapter() {
 
-    override fun configure(web: WebSecurity?) {
-        web
-                ?.ignoring()
-                ?.antMatchers(
-                        "/**/favicon.ico",
-                        "/images/**",
-                        "/css/**",
-                        "/js/**"
-                )
+  override fun configure(web: WebSecurity?) {
+    web
+      ?.ignoring()
+      ?.antMatchers(
+        "/**/favicon.ico",
+        "/images/**",
+        "/css/**",
+        "/js/**"
+      )
+  }
+
+  override fun configure(http: HttpSecurity) {
+    http
+      .authorizeRequests()
+      .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
+      .permitAll()
+      .anyRequest()
+      .authenticated()
+
+    http
+      .formLogin()
+      .loginProcessingUrl("/authenticate")
+      .loginPage("/login")
+      .failureUrl("/login")
+      .defaultSuccessUrl("/top", true)
+      .usernameParameter("email")
+      .passwordParameter("password")
+      .and()
+
+    http
+      .logout()
+      .logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
+      .logoutSuccessUrl("/")
+  }
+
+  override fun configure(auth: AuthenticationManagerBuilder) {
+    auth
+      .userDetailsService(LoginService(userRepository))
+      .passwordEncoder(passwordEncoder)
+  }
+
+  @Configuration
+  protected class AuthenticationConfiguration(
+    @Autowired
+    private val userDetailsService: UserDetailsService
+  ) : GlobalAuthenticationConfigurerAdapter() {
+
+    @Throws(Exception::class)
+    override fun init(auth: AuthenticationManagerBuilder) {
+      auth
+        .userDetailsService<UserDetailsService>(userDetailsService)
+        .passwordEncoder(BCryptPasswordEncoder())
+
     }
-
-    override fun configure(http: HttpSecurity) {
-        http
-                .authorizeRequests()
-                .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-
-        http
-                .formLogin()
-                .loginProcessingUrl("/authenticate")
-                .loginPage("/login")
-                .failureUrl("/login")
-                .defaultSuccessUrl("/top", true)
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .and()
-
-        http
-                .logout()
-                .logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
-                .logoutSuccessUrl("/")
-    }
-
-    override fun configure(auth: AuthenticationManagerBuilder) {
-        auth
-                .userDetailsService(LoginService(userRepository))
-                .passwordEncoder(passwordEncoder)
-    }
-
-    @Configuration
-    protected class AuthenticationConfiguration(
-            @Autowired
-            private val userDetailsService: UserDetailsService
-    ) : GlobalAuthenticationConfigurerAdapter() {
-
-        @Throws(Exception::class)
-        override fun init(auth: AuthenticationManagerBuilder) {
-            auth
-              .userDetailsService<UserDetailsService>(userDetailsService)
-              .passwordEncoder(BCryptPasswordEncoder())
-
-        }
-    }
+  }
 }
