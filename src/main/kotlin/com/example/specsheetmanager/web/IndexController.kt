@@ -10,23 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping
 class IndexController {
 
     @ModelAttribute
-    fun setUpLoginForm(): LoginForm {
-        return LoginForm()
-    }
+    fun setUpLoginForm(): LoginForm = LoginForm()
 
     @RequestMapping("/")
-    fun index(): String {
-        return "index"
-    }
+    fun index(): String = "index"
 
     @RequestMapping("login")
-    fun login(): String {
-        return "login"
-    }
+    fun login(): String = "login"
 
     @RequestMapping("top")
-    fun top(): String {
-        return "top"
-    }
+    fun top(): String = "top"
 }
 
