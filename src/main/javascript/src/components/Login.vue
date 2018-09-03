@@ -1,8 +1,8 @@
 <template>
-    <v-form>
-        <v-container grid-list-xl text-xs-center>
-            <v-layout column wrap>
-                <v-flex xs10 offset-xs1>
+    <v-container>
+        <v-layout column wrap>
+            <v-flex>
+                <v-form>
                     <v-text-field
                             label="E-mail"
                             required
@@ -12,10 +12,12 @@
                             :type="'password'"
                             required
                     />
-                </v-flex>
-            </v-layout>
-        </v-container>
-    </v-form>
+                    <v-btn color="info">Login</v-btn>
+                    <v-btn color="warning">Clear</v-btn>
+                </v-form>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script lang="ts">
