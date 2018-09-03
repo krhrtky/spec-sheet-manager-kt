@@ -10,8 +10,9 @@ import {
   VGrid,
   VToolbar,
   transitions,
-    VForm,
-    VTextField
+  VForm,
+  VTextField,
+    VCard,
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -27,6 +28,7 @@ Vue.use(Vuetify, {
     VToolbar,
       transitions,
       VForm,
-      VTextField
+      VTextField,
+      VCard,
   },
 })
