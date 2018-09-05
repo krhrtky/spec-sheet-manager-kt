@@ -10,29 +10,16 @@
       app
     >
       <v-list>
-          <!--
         <v-list-tile
           value="true"
           v-for="(item, i) in items"
           :key="i"
         >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        -->
-
-        <v-list-tile>
-          <router-link to="/">home</router-link>
-        </v-list-tile>
-        <v-list-tile>
-          <router-link to="/about">about</router-link>
-        </v-list-tile>
-        <v-list-tile>
-          <router-link to="/login">Login</router-link>
+          <router-link :to="{path: item.path}">
+            <v-btn color="info">
+              {{item.title}}
+            </v-btn>
+          </router-link>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -83,22 +70,38 @@
 
 <script lang="ts">
 
-export default {
-  name: 'App',
-  data () {
-    return {
-      clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+  export default {
+    name: 'App',
+    data () {
+      return {
+        clipped: false,
+        drawer: true,
+        fixed: false,
+        items: [
+          {
+            path: '/',
+            title: 'Home'
+          },
+          {
+            path: '/about',
+            title: 'About'
+          },
+          {
+            path: '/login',
+            title: 'Login'
+          },
+        ],
+        miniVariant: false,
+        right: true,
+        rightDrawer: false,
+        title: 'Spec Sheet Manager'
+      }
     }
   }
-}
 </script>
+
+<style scoped>
+  a {
+    text-decoration: none;
+  }
+</style>

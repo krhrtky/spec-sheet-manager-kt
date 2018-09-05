@@ -2,10 +2,10 @@ root = true
 
 [*]
 end_of_line = lf
-trim_trailing_whitespace = ture
+trim_trailing_whitespace = true
 charset = utf-8
 
-[*.js, *.vue, *.ts]
+[{*.js, *.vue, *.ts}]
 indent_style = space
 indent_size = 2
 
