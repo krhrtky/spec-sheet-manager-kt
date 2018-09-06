@@ -69,9 +69,12 @@
 </template>
 
 <script lang="ts">
+  import { Component, Vue } from "vue-property-decorator";
 
-  export default {
+  @Component({
     name: 'App',
+  })
+  export default class App extends Vue {
     data () {
       return {
         clipped: false,
