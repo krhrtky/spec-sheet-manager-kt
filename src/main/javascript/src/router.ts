@@ -1,7 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Login from "./components/Login.vue";
+import Login from "./components/users/Login.vue";
+import CreateUser from "./components/users/CreateUser.vue";
+
 
 Vue.use(Router);
 
@@ -27,6 +29,11 @@ export default new Router({
         path: "/login",
         name: "login",
         component: Login
+    },
+    {
+      path: "/users/new",
+      name: "Sign on",
+      component: CreateUser
     },
   ]
 });

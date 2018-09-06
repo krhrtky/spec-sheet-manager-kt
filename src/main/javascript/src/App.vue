@@ -93,6 +93,10 @@
             path: '/login',
             title: 'Login'
           },
+          {
+            path: "/users/new",
+            title: "Sign on",
+          },
         ],
         miniVariant: false,
         right: true,
@@ -103,8 +107,13 @@
   }
 </script>
 
-<style scoped>
+<style>
   a {
     text-decoration: none;
+  }
+
+  .v-card {
+    margin: 0 10rem;
+    padding: 0 5rem 5rem 5rem;
   }
 </style>
