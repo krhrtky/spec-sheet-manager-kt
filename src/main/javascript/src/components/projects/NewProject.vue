@@ -3,26 +3,19 @@
     <v-flex>
       <v-card>
         <v-card-title primary-title>
-          <h1>Sign On</h1>
+          <h1>New Project</h1>
         </v-card-title>
         <v-form>
           <v-text-field
-            label="User Name"
+            label="Project Name"
             required
           />
+          <month-picker title="Start Date"/>
+          <month-picker title="End Date"/>
           <v-text-field
             label="E-mail"
             required
           />
-          <v-text-field
-            label="Password"
-            :type="'password'"
-            required
-          />
-          <v-text-field
-            label="Password Confirmation"
-            :type="'password'"
-            required></v-text-field>
           <v-btn color="info">Confirm</v-btn>
           <v-btn color="warning">Cancel</v-btn>
         </v-form>
@@ -32,14 +25,20 @@
 
 </template>
 
-<script>
-  import {Component, Vue} from "vue-property-decorator";
+<script lang="ts">
+  import {Component, Vue} from 'vue-property-decorator';
+  import MonthPicker from '@/components/commons/MonthPicker.vue';
 
   @Component({
-    name: 'CreateUser'
-  })
-  export default class CreateUser extends Vue {
+    name: 'NewProject',
+    components: {
+      MonthPicker,
     }
+  })
+  export default class NewProject extends Vue {
+
+  }
+
 </script>
 
 <style scoped>

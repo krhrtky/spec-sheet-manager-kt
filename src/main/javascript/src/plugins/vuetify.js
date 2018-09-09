@@ -13,6 +13,8 @@ import {
   VForm,
   VTextField,
   VCard,
+  VMenu,
+  VDatePicker,
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -30,5 +32,7 @@ Vue.use(Vuetify, {
     VForm,
     VTextField,
     VCard,
+    VMenu,
+    VDatePicker,
   },
 })

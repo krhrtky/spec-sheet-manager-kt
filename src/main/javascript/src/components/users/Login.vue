@@ -3,7 +3,9 @@
     <v-flex>
       <v-card>
         <v-card-title primary-title>
-          Login
+          <h1>
+            Login
+          </h1>
         </v-card-title>
         <v-form>
           <v-text-field

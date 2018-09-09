@@ -97,6 +97,10 @@
             path: "/users/new",
             title: "Sign on",
           },
+          {
+            path: "/project/new",
+            title: "Add Project",
+          },
         ],
         miniVariant: false,
         right: true,
