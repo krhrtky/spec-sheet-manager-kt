@@ -13,9 +13,22 @@
           <month-picker title="Start Date"/>
           <month-picker title="End Date"/>
           <v-text-field
-            label="E-mail"
+            label="Languages"
             required
           />
+          <v-text-field
+            label="FrameWorks"
+            required
+          />
+          <v-text-field
+            label="Middlewares"
+            required
+          />
+          <v-textarea
+            auto-grow
+            label="Description"
+            rows="5"
+          ></v-textarea>
           <v-btn color="info">Confirm</v-btn>
           <v-btn color="warning">Cancel</v-btn>
         </v-form>

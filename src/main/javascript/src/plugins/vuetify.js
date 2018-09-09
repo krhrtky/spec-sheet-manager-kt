@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import {
-  Vuetify,
-  VApp,
-  VNavigationDrawer,
-  VFooter,
-  VList,
-  VBtn,
-  VIcon,
-  VGrid,
-  VToolbar,
   transitions,
-  VForm,
-  VTextField,
+  VApp,
+  VBtn,
   VCard,
-  VMenu,
   VDatePicker,
+  VFooter,
+  VForm,
+  VGrid,
+  VIcon,
+  VList,
+  VMenu,
+  VNavigationDrawer,
+  VTextarea,
+  VTextField,
+  VToolbar,
+  Vuetify,
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -34,5 +35,6 @@ Vue.use(Vuetify, {
     VCard,
     VMenu,
     VDatePicker,
+    VTextarea,
   },
 })
