@@ -69,7 +69,7 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from "vue-property-decorator";
+  import {Component, Vue} from "vue-property-decorator";
 
   @Component({
     name: 'App',
@@ -100,6 +100,10 @@
           {
             path: "/project/new",
             title: "Add Project",
+          },
+          {
+            path: "/projects",
+            title: "Projects",
           },
         ],
         miniVariant: false,

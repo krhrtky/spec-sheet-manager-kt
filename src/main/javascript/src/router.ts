@@ -4,7 +4,7 @@ import Home from "./views/Home.vue";
 import Login from "./components/users/Login.vue";
 import CreateUser from "./components/users/CreateUser.vue";
 import NewProject from "./components/projects/NewProject.vue";
-
+import ProjectList from '@/components/projects/ProjectList.vue'
 
 
 Vue.use(Router);
@@ -41,6 +41,11 @@ export default new Router({
       path: "/project/new",
       name: "Add Project",
       component: NewProject
+    },
+    {
+      path: "/projects",
+      name: "Projects",
+      component: ProjectList
     },
   ]
 });
