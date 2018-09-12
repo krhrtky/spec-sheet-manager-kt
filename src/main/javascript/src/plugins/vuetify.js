@@ -5,6 +5,7 @@ import {
   VBtn,
   VCard,
   VDatePicker,
+  VDivider,
   VFooter,
   VForm,
   VGrid,
@@ -36,5 +37,6 @@ Vue.use(Vuetify, {
     VMenu,
     VDatePicker,
     VTextarea,
+    VDivider,
   },
 })
