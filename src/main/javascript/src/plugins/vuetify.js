@@ -10,6 +10,7 @@ import {
   VForm,
   VGrid,
   VIcon,
+  VInput,
   VList,
   VMenu,
   VNavigationDrawer,
@@ -38,5 +39,6 @@ Vue.use(Vuetify, {
     VDatePicker,
     VTextarea,
     VDivider,
+    VInput,
   },
 })
