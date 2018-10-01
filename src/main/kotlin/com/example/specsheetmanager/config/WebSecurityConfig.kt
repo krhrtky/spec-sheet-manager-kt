@@ -1,5 +1,7 @@
 package com.example.specsheetmanager.config
 
+import com.example.specsheetmanager.filter.JWTAuthenticationFilter
+import com.example.specsheetmanager.filter.JWTAuthorizationFilter
 import com.example.specsheetmanager.repository.UserRepository
 import com.example.specsheetmanager.service.LoginService
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,6 +16,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.config.http.SessionCreationPolicy
+
+
 
 
 @Configuration
@@ -37,6 +42,17 @@ class WebSecurityConfig(
   }
 
   override fun configure(http: HttpSecurity) {
+    http
+      .cors()
+      .and().authorizeRequests()
+      .antMatchers("/api", "/api/auth", "/api/login").permitAll()
+      .anyRequest().authenticated()
+      .and().logout()
+      .and().csrf().disable()
+      .addFilter(JWTAuthenticationFilter(authenticationManager(), passwordEncoder))
+      .addFilter(JWTAuthorizationFilter(authenticationManager()))
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
     http
       .authorizeRequests()
       .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
