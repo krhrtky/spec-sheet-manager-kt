@@ -3,11 +3,12 @@ CREATE DATABASE IF NOT EXISTS spec_sheet_manager_kt;
 USE spec_sheet_manager_kt;
 
 CREATE TABLE IF NOT EXISTS user (
-  id INT(11) NOT NULL  auto_increment PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  enabled BOOLEAN NOT NULL ,
-  role_type VARCHAR(255) NOT NULL
+  id              int auto_increment primary key,
+  email           varchar(255) not null,
+  name            varchar(255) not null,
+  digest_password varchar(255) not null,
+  enabled         tinyint(1)   not null,
+  role_type       varchar(255) not null
 );
 
 CREATE TABLE IF NOT EXISTS project (

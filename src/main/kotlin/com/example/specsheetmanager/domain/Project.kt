@@ -9,7 +9,7 @@ import javax.persistence.*
 @Table
 data class Project(
         @Id
-        @GeneratedValue()
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         val id: Int? = null,
         @Column(name = "name")

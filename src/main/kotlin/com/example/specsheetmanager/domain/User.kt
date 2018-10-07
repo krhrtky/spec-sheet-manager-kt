@@ -11,13 +11,11 @@ import org.springframework.util.DigestUtils
 import javax.persistence.*
 import javax.persistence.FetchType
 
-
-
 @Entity
 @Table
 data class User(
         @Id
-        @GeneratedValue()
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
         var id: Int? = null,
         @Column(name = "name")
@@ -34,7 +32,6 @@ data class User(
         @Column(name = "role_type")
         var roleType: String = "USER"
 ): UserDetails {
-
 
         override fun getAuthorities(): MutableCollection<out GrantedAuthority>? {
             return AuthorityUtils.createAuthorityList(this.roleType)
