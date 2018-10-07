@@ -4,6 +4,7 @@
 
 /src/main/resources/application.yml
 /src/main/resources/static
+src/main/resources/dist
 
 ### STS ###
 .apt_generated
