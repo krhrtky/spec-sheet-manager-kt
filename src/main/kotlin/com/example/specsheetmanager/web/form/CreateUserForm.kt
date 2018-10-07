@@ -5,13 +5,13 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 data class CreateUserForm(
-        @get:NotBlank
-        var name: String? = null,
-        @get:NotBlank
-        @get:Email
-        var email: String? = null,
-        @get:Size(min = 5)
-        var password: String? = null,
-        @get:Size(min = 5)
-        var confirmationPassword: String? = null
+  @get:NotBlank
+  var name: String? = null,
+  @get:NotBlank
+  @get:Email
+  var email: String? = null,
+  @get:Size(min = 5)
+  var password: String? = null,
+  @get:Size(min = 5)
+  var confirmationPassword: String? = null
 )

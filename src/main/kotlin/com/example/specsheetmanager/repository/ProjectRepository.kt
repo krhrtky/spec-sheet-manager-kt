@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ProjectRepository: JpaRepository<Project, Int> {
 
-    fun findByUserId(userId: Int): List<Project>
+  fun findByUserId(userId: Int): List<Project>
 
-    fun findByUserIdAndId(userId: Int, projectId: Int): Project
+  fun findByUserIdAndId(userId: Int, projectId: Int): Project
 
-    fun findByUserIdAndIdIn(userId:Int, id: List<Int>): List<Project>
-
+  fun findByUserIdAndIdIn(userId:Int, id: List<Int>): List<Project>
 }

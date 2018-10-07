@@ -18,9 +18,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.config.http.SessionCreationPolicy
 
-
-
-
 @Configuration
 @EnableWebSecurity
 class WebSecurityConfig(
@@ -35,9 +32,10 @@ class WebSecurityConfig(
       ?.ignoring()
       ?.antMatchers(
         "/**/favicon.ico",
-        "/images/**",
+        "/img/**",
         "/css/**",
-        "/js/**"
+        "/js/**",
+        "/index.html"
       )
   }
 
@@ -45,20 +43,35 @@ class WebSecurityConfig(
     http
       .cors()
       .and().authorizeRequests()
-      .antMatchers("/api", "/api/auth", "/api/login").permitAll()
-      .anyRequest().authenticated()
-      .and().logout()
-      .and().csrf().disable()
-      .addFilter(JWTAuthenticationFilter(authenticationManager(), passwordEncoder))
-      .addFilter(JWTAuthorizationFilter(authenticationManager()))
-      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-    http
-      .authorizeRequests()
-      .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
+      .antMatchers(
+        "/",
+        "/api/auth",
+        "/api/login",
+        "/login",
+        "/users/new",
+        "/users/create",
+        "/authenticate"
+      )
       .permitAll()
       .anyRequest()
       .authenticated()
+      .and()
+      .logout()
+      .and()
+      .csrf()
+      .disable()
+      .addFilter(JWTAuthenticationFilter(authenticationManager(), passwordEncoder))
+      .addFilter(JWTAuthorizationFilter(authenticationManager()))
+      .sessionManagement()
+      .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+//    http
+//      .authorizeRequests()
+//      .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
+//      .antMatchers("/api/auth", "/api/login", "/", "/login", "/users/new", "/users/create", "/authenticate")
+//      .permitAll()
+//      .anyRequest()
+//      .authenticated()
 
     http
       .formLogin()

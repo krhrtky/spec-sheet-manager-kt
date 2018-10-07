@@ -9,28 +9,30 @@ import org.springframework.stereotype.Service
 
 @Service
 class ProjectService(
-        @Autowired
-        private val projectRepository: ProjectRepository
+  @Autowired
+  private val projectRepository: ProjectRepository
 ) {
-    fun insertProject(form: AddProjectForm, userId: Int): Boolean = try {
-        projectRepository.save(Project.convertFromAddForm(form, userId))
-        true
+  fun insertProject(form: AddProjectForm, userId: Int)= try {
+    projectRepository.save(Project.convertFromAddForm(form, userId))
+    true
 
-    } catch (e: Exception) {
-        false
-    }
+  } catch (e: Exception) {
+    e.printStackTrace()
+    false
+  }
 
-    fun findProjectList(userId: Int): List<Project> = projectRepository.findByUserId(userId)
+  fun findProjectList(userId: Int) = projectRepository.findByUserId(userId)
 
-    fun findByUserIdProjectId(userId: Int, projectId: Int): Project = projectRepository.findByUserIdAndId(userId, projectId)
+  fun findByUserIdProjectId(userId: Int, projectId: Int) = projectRepository.findByUserIdAndId(userId, projectId)
 
-    fun editProject(form: EditProjectForm, userId: Int): Boolean = try {
-        projectRepository.save(Project.convertFromEdit(form, userId))
-        true
+  fun editProject(form: EditProjectForm, userId: Int) = try {
+    projectRepository.save(Project.convertFromEdit(form, userId))
+    true
 
-    } catch (e: Exception) {
-        false
-    }
+  } catch (e: Exception) {
+    e.printStackTrace()
+    false
+  }
 
-    fun findByUserIdAndIdIn(userId:Int, id: List<Int>): List<Project> = projectRepository.findByUserIdAndIdIn(userId, id)
+  fun findByUserIdAndIdIn(userId:Int, id: List<Int>) = projectRepository.findByUserIdAndIdIn(userId, id)
 }
