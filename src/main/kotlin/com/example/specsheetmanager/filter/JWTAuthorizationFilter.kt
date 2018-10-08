@@ -30,17 +30,27 @@ class JWTAuthorizationFilter(
   }
 
   private fun getAuthentication(request: HttpServletRequest): UsernamePasswordAuthenticationToken? {
-    val token =  request.getHeader("SSM-TOKEN")?: ""
-    if (token != null) {
+    val tokenWithPadding =  request.getHeader("SSM-TOKEN")?: ""
+    if (tokenWithPadding != null) {
 
       val key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
+      val token = tokenWithPadding.replace("ssm-token:", "")
 
-      // parse the token.
-      val user = Jwts.parser()
-        .setSigningKey(key)
-        .parseClaimsJws(token.replace("ssh-token:", ""))
-        .getBody()
-        .getSubject()
+      val user = try {
+        // parse the token.
+        Jwts
+          .parser()
+          .setSigningKey(key)
+          .parseClaimsJws(token)
+          .body
+          .subject
+
+      } catch (e: Exception) {
+        e.printStackTrace()
+        null
+      }
+
+
 
       return if (user != null) {
         UsernamePasswordAuthenticationToken(user, null, ArrayList<GrantedAuthority>())

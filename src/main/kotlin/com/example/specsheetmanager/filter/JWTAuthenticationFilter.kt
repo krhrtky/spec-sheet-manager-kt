@@ -67,7 +67,7 @@ class JWTAuthenticationFilter(
       ?.signWith(key)
       ?.compact()
 
-    response?.addHeader("SSM-TOKEN", "ssh-token:$token")
+    response?.addHeader("SSM-TOKEN", "ssm-token:$token")
   }
 
   override fun getFailureHandler(): AuthenticationFailureHandler {
