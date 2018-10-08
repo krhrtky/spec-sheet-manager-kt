@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.authentication.AuthenticationFailureHandler
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import java.util.*
@@ -43,7 +44,7 @@ class JWTAuthenticationFilter(
       .authenticate(
         UsernamePasswordAuthenticationToken(
           loginForm.email,
-          loginForm.name,
+          loginForm.password,
           mutableListOf()
         )
       )
@@ -67,5 +68,9 @@ class JWTAuthenticationFilter(
       ?.compact()
 
     response?.addHeader("SSM-TOKEN", "ssh-token:$token")
+  }
+
+  override fun getFailureHandler(): AuthenticationFailureHandler {
+    return super.getFailureHandler()
   }
 }

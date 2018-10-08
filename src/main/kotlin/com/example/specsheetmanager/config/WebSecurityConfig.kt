@@ -24,7 +24,9 @@ class WebSecurityConfig(
   @Autowired
   private val userRepository: UserRepository,
   @Autowired
-  private val passwordEncoder: PasswordEncoder
+  private val passwordEncoder: PasswordEncoder,
+  @Autowired
+  private val userDetailsService: UserDetailsService
 ): WebSecurityConfigurerAdapter() {
 
   override fun configure(web: WebSecurity?) {
@@ -76,9 +78,9 @@ class WebSecurityConfig(
     http
       .formLogin()
       .loginProcessingUrl("/authenticate")
-      .loginPage("/login")
-      .failureUrl("/login")
-      .defaultSuccessUrl("/top", true)
+//      .loginPage("/login")
+//      .failureUrl("/login")
+//      .dependency-managementfaultSuccessUrl("/top", true)
       .usernameParameter("email")
       .passwordParameter("password")
       .and()
@@ -87,6 +89,13 @@ class WebSecurityConfig(
       .logout()
       .logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
       .logoutSuccessUrl("/")
+  }
+
+  @Throws(Exception::class)
+  fun configureAuth(auth: AuthenticationManagerBuilder) {
+    auth
+      .userDetailsService(userDetailsService)
+      .passwordEncoder(passwordEncoder)
   }
 
   override fun configure(auth: AuthenticationManagerBuilder) {
