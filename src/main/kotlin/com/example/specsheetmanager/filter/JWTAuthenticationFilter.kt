@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -60,13 +59,15 @@ class JWTAuthenticationFilter(
     val expiredDate = Date(System.currentTimeMillis() + 604800000/*1週間 */)
     val key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
 
+    //TODO: キー外部ファイル化
     val token = Jwts
       .builder()
       .setSubject(user.username)
       ?.setExpiration(expiredDate)
-      ?.signWith(key)
+      ?.signWith(Keys.hmacShaKeyFor("secretsecretsecretsecretsecretsecretsecret".toByteArray()), SignatureAlgorithm.HS256)
       ?.compact()
 
+    //TODO: ヘッダー, prefix外出し
     response?.addHeader("SSM-TOKEN", "ssm-token:$token")
   }
 
