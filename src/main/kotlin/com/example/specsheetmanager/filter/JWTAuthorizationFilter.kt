@@ -49,5 +49,7 @@ class JWTAuthorizationFilter(
     }
   }
 
-
+  override fun getAuthenticationManager(): AuthenticationManager {
+    return super.getAuthenticationManager()
+  }
 }
