@@ -1,5 +1,6 @@
 package com.example.specsheetmanager.config
 
+import com.example.specsheetmanager.filter.CORSFilter
 import com.example.specsheetmanager.filter.JWTAuthenticationFilter
 import com.example.specsheetmanager.filter.JWTAuthorizationFilter
 import com.example.specsheetmanager.repository.UserRepository
@@ -17,6 +18,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+
 
 @Configuration
 @EnableWebSecurity
@@ -62,25 +67,19 @@ class WebSecurityConfig(
       .and()
       .csrf()
       .disable()
+      .addFilterBefore(CORSFilter(), JWTAuthenticationFilter::class.java)
       .addFilter(JWTAuthenticationFilter(authenticationManager(), passwordEncoder))
       .addFilter(JWTAuthorizationFilter(authenticationManager()))
       .sessionManagement()
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-//    http
-//      .authorizeRequests()
-//      .antMatchers("/", "/login", "/users/new", "/users/create", "/authenticate")
-//      .antMatchers("/api/auth", "/api/login", "/", "/login", "/users/new", "/users/create", "/authenticate")
-//      .permitAll()
-//      .anyRequest()
-//      .authenticated()
 
     http
       .formLogin()
       .loginProcessingUrl("/authenticate")
-//      .loginPage("/login")
-//      .failureUrl("/login")
-//      .dependency-managementfaultSuccessUrl("/top", true)
+      .loginPage("/login")
+      .failureUrl("/login")
+      .defaultSuccessUrl("/top", false)
       .usernameParameter("email")
       .passwordParameter("password")
       .and()
@@ -102,6 +101,24 @@ class WebSecurityConfig(
     auth
       .userDetailsService(LoginService(userRepository))
       .passwordEncoder(passwordEncoder)
+  }
+
+
+  /** //   * CORS設定
+   *
+   * @return CORS設定
+   */
+  private fun corsConfigurationSource(): CorsConfigurationSource {
+    val corsConfiguration = CorsConfiguration()
+    corsConfiguration.addAllowedMethod(CorsConfiguration.ALL)
+    corsConfiguration.addAllowedHeader(CorsConfiguration.ALL)
+    corsConfiguration.addAllowedOrigin("http://localhost:8081")
+    corsConfiguration.setAllowCredentials(true)
+
+    val corsConfigurationSource: UrlBasedCorsConfigurationSource = UrlBasedCorsConfigurationSource()
+    corsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration)
+
+    return corsConfigurationSource
   }
 
   @Configuration
