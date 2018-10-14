@@ -27,6 +27,7 @@ class JWTAuthenticationFilter(
   init {
     setRequiresAuthenticationRequestMatcher(AntPathRequestMatcher("/api/auth", "POST"))
     usernameParameter = "email"
+
   }
 
   override fun getAuthenticationManager(): AuthenticationManager {
