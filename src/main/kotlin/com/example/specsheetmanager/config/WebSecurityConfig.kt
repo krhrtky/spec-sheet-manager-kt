@@ -1,6 +1,5 @@
 package com.example.specsheetmanager.config
 
-import com.example.specsheetmanager.filter.CORSFilter
 import com.example.specsheetmanager.filter.JWTAuthenticationFilter
 import com.example.specsheetmanager.filter.JWTAuthorizationFilter
 import com.example.specsheetmanager.repository.UserRepository
@@ -8,16 +7,16 @@ import com.example.specsheetmanager.service.LoginService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter
-import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -49,6 +48,7 @@ class WebSecurityConfig(
   override fun configure(http: HttpSecurity) {
     http
       .cors()
+      .configurationSource(this.corsConfigurationSource())
       .and().authorizeRequests()
       .antMatchers(
         "/",
@@ -67,22 +67,16 @@ class WebSecurityConfig(
       .and()
       .csrf()
       .disable()
-      .addFilterBefore(CORSFilter(), JWTAuthenticationFilter::class.java)
       .addFilter(JWTAuthenticationFilter(authenticationManager(), passwordEncoder))
       .addFilter(JWTAuthorizationFilter(authenticationManager()))
       .sessionManagement()
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-
-    http
-      .formLogin()
-      .loginProcessingUrl("/authenticate")
-      .loginPage("/login")
-      .failureUrl("/login")
-      .defaultSuccessUrl("/top", false)
-      .usernameParameter("email")
-      .passwordParameter("password")
-      .and()
+//    http
+//      .formLogin()
+//      .loginProcessingUrl("/authenticate")
+//      .loginPage("/login")
+//      .and()
 
     http
       .logout()
@@ -104,8 +98,8 @@ class WebSecurityConfig(
   }
 
 
-  /** //   * CORS設定
-   *
+  /**
+   * CORS設定
    * @return CORS設定
    */
   private fun corsConfigurationSource(): CorsConfigurationSource {
@@ -113,7 +107,8 @@ class WebSecurityConfig(
     corsConfiguration.addAllowedMethod(CorsConfiguration.ALL)
     corsConfiguration.addAllowedHeader(CorsConfiguration.ALL)
     corsConfiguration.addAllowedOrigin("http://localhost:8081")
-    corsConfiguration.setAllowCredentials(true)
+    corsConfiguration.addExposedHeader("SSM-TOKEN")
+    corsConfiguration.allowCredentials = true
 
     val corsConfigurationSource: UrlBasedCorsConfigurationSource = UrlBasedCorsConfigurationSource()
     corsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration)
