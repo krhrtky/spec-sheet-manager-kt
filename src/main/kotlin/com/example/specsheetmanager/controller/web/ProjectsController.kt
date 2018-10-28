@@ -24,13 +24,13 @@ class ProjectsController(
 ) {
 
   @ModelAttribute
-  fun setUpProjectForm(): AddProjectForm = AddProjectForm()
+  fun setUpProjectForm() = AddProjectForm()
 
   @ModelAttribute
-  fun setUpPrintProjectForm(): PrintTargetProjectForm = PrintTargetProjectForm()
+  fun setUpPrintProjectForm() = PrintTargetProjectForm()
 
   @RequestMapping("/new")
-  fun new(): String = "projects/new"
+  fun new() = "projects/new"
 
   @PostMapping("/add")
   fun addProject(
@@ -77,16 +77,15 @@ class ProjectsController(
   }
 
   @PostMapping("/{id}/edit")
-  fun edit(
+  fun BindingResult.edit(
     @Validated
     form: EditProjectForm,
-    bindingResult: BindingResult,
     model: Model
   ): String {
 
     val user = getSessionUser() ?: throw IllegalAccessException("session情報にユーザーがありません。")
 
-    if(bindingResult.hasErrors()) return "/projects/{id}/edit"
+    if(hasErrors()) return "/projects/{id}/edit"
 
     return if(projectService.editProject(form, user.id!!)) "redirect:/projects/" else "projects/{id}/edit"
   }

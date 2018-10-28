@@ -1,7 +1,6 @@
 package com.example.specsheetmanager.filter
 
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -33,37 +32,22 @@ class JWTAuthorizationFilter(
 
   private fun getAuthentication(request: HttpServletRequest): UsernamePasswordAuthenticationToken? {
     //TODO: ヘッダー外出し
-    val tokenWithPadding =  request.getHeader("SSM-TOKEN")?: ""
-    if (tokenWithPadding != null) {
+    val tokenWithPadding = request.getHeader("SSM-TOKEN") ?: ""
 
-      val key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
-      //TODO: prefix外出し
-      val token = tokenWithPadding.replace("ssm-token:", "")
-
+    return if (tokenWithPadding.isBlank()) {
+      null
+    } else {
       //TODO: キー外部ファイル化
-      val user = try {
-        // parse the token.
-        Jwts
-          .parser()
-          .setSigningKey(Keys.hmacShaKeyFor("secretsecretsecretsecretsecretsecretsecret".toByteArray()))
-          .parseClaimsJws(token)
-          .body
-          .subject
+      val user = Jwts
+        .parser()
+        .setSigningKey(Keys.hmacShaKeyFor("secretsecretsecretsecretsecretsecretsecret".toByteArray()))
+        .parseClaimsJws(tokenWithPadding.replace("ssm-token:", ""))
+        .body
+        .subject
 
-      } catch (e: Exception) {
-        e.printStackTrace()
-        null
-      }
-
-
-
-      return if (user != null) {
-        UsernamePasswordAuthenticationToken(user, null, ArrayList<GrantedAuthority>())
-      } else null
+      UsernamePasswordAuthenticationToken(user, null, ArrayList<GrantedAuthority>())
     }
-    return null
   }
-
 
   override fun getAuthenticationManager(): AuthenticationManager {
     return super.getAuthenticationManager()
