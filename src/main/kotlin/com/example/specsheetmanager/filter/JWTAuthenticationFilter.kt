@@ -1,7 +1,7 @@
 package com.example.specsheetmanager.filter
 
+import com.example.specsheetmanager.controller.web.form.LoginForm
 import com.example.specsheetmanager.domain.User
-import com.example.specsheetmanager.web.form.LoginForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.authentication.AuthenticationFailureHandler
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import java.util.*
@@ -72,7 +71,4 @@ class JWTAuthenticationFilter(
     response?.addHeader("SSM-TOKEN", "ssm-token:$token")
   }
 
-  override fun getFailureHandler(): AuthenticationFailureHandler {
-    return super.getFailureHandler()
-  }
 }

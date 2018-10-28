@@ -1,7 +1,7 @@
-package com.example.specsheetmanager.web.form
+package com.example.specsheetmanager.controller.web.form
 
 import org.springframework.format.annotation.DateTimeFormat
-import java.util.Date
+import java.util.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 

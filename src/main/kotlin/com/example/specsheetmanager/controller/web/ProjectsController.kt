@@ -1,16 +1,20 @@
-package com.example.specsheetmanager.web
+package com.example.specsheetmanager.controller.web
 
+import com.example.specsheetmanager.controller.web.form.AddProjectForm
+import com.example.specsheetmanager.controller.web.form.EditProjectForm
+import com.example.specsheetmanager.controller.web.form.PrintTargetProjectForm
 import com.example.specsheetmanager.service.ProjectService
 import com.example.specsheetmanager.util.getSessionUser
-import com.example.specsheetmanager.web.form.AddProjectForm
-import com.example.specsheetmanager.web.form.EditProjectForm
-import com.example.specsheetmanager.web.form.PrintTargetProjectForm
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 @RequestMapping("/projects")

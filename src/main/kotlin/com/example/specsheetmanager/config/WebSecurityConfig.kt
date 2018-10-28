@@ -72,16 +72,9 @@ class WebSecurityConfig(
       .sessionManagement()
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-//    http
-//      .formLogin()
-//      .loginProcessingUrl("/authenticate")
-//      .loginPage("/login")
-//      .and()
-
     http
       .logout()
       .logoutRequestMatcher(AntPathRequestMatcher("/logout**"))
-      .logoutSuccessUrl("/")
   }
 
   @Throws(Exception::class)

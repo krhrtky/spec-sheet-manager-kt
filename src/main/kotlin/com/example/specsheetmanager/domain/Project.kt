@@ -1,8 +1,8 @@
 package com.example.specsheetmanager.domain
 
-import com.example.specsheetmanager.web.form.AddProjectForm
-import com.example.specsheetmanager.web.form.EditProjectForm
-import java.util.Date
+import com.example.specsheetmanager.controller.web.form.AddProjectForm
+import com.example.specsheetmanager.controller.web.form.EditProjectForm
+import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

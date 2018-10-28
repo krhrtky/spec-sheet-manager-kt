@@ -1,9 +1,9 @@
 package com.example.specsheetmanager.service
 
+import com.example.specsheetmanager.controller.web.form.AddProjectForm
+import com.example.specsheetmanager.controller.web.form.EditProjectForm
 import com.example.specsheetmanager.domain.Project
 import com.example.specsheetmanager.repository.ProjectRepository
-import com.example.specsheetmanager.web.form.AddProjectForm
-import com.example.specsheetmanager.web.form.EditProjectForm
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

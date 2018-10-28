@@ -1,4 +1,4 @@
-package com.example.specsheetmanager.web.form
+package com.example.specsheetmanager.controller.web.form
 
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank

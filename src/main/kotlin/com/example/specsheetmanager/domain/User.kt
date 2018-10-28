@@ -1,6 +1,6 @@
 package com.example.specsheetmanager.domain
 
-import com.example.specsheetmanager.web.form.CreateUserForm
+import com.example.specsheetmanager.controller.web.form.CreateUserForm
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils.createAuthorityList
 import org.springframework.security.core.userdetails.UserDetails
@@ -54,7 +54,7 @@ data class User(
 
   companion object {
 
-    private var passwordEncoder: PasswordEncoder = BCryptPasswordEncoder();
+    private var passwordEncoder: PasswordEncoder = BCryptPasswordEncoder()
     fun convertFromCreateForm(form: CreateUserForm): User {
 
       val (name, email, password) = form

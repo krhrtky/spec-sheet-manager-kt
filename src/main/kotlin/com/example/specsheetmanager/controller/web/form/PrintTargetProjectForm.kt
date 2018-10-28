@@ -1,4 +1,4 @@
-package com.example.specsheetmanager.web.form
+package com.example.specsheetmanager.controller.web.form
 
 data class PrintTargetProjectForm(
   var printTargetProjectIdList: Array<Int> = arrayOf()
