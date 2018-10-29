@@ -1,5 +1,6 @@
 package com.example.specsheetmanager.filter
 
+import com.example.specsheetmanager.domain.User
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.security.authentication.AuthenticationManager
@@ -38,18 +39,26 @@ class JWTAuthorizationFilter(
       null
     } else {
       //TODO: キー外部ファイル化
-      val user = Jwts
+      val userName = Jwts
         .parser()
         .setSigningKey(Keys.hmacShaKeyFor("secretsecretsecretsecretsecretsecretsecret".toByteArray()))
         .parseClaimsJws(tokenWithPadding.replace("ssm-token:", ""))
         .body
         .subject
 
+      val userId = Jwts
+        .parser()
+        .setSigningKey(Keys.hmacShaKeyFor("secretsecretsecretsecretsecretsecretsecret".toByteArray()))
+        .parseClaimsJws(tokenWithPadding.replace("ssm-token:", ""))
+        .body
+        .id
+
+      val user = User()
+      user.email = userName
+      user.id = userId.toInt()
+
       UsernamePasswordAuthenticationToken(user, null, ArrayList<GrantedAuthority>())
     }
   }
 
-  override fun getAuthenticationManager(): AuthenticationManager {
-    return super.getAuthenticationManager()
-  }
 }

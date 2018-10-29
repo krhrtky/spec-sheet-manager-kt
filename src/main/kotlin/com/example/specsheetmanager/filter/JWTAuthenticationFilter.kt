@@ -63,6 +63,7 @@ class JWTAuthenticationFilter(
     val token = Jwts
       .builder()
       .setSubject(user.username)
+      .setId(user.id.toString())
       ?.setExpiration(expiredDate)
       ?.signWith(Keys.hmacShaKeyFor("secretsecretsecretsecretsecretsecretsecret".toByteArray()), SignatureAlgorithm.HS256)
       ?.compact()
