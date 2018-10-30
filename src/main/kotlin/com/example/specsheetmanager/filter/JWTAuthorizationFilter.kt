@@ -3,6 +3,7 @@ package com.example.specsheetmanager.filter
 import com.example.specsheetmanager.domain.User
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse
 
 
 class JWTAuthorizationFilter(
+  @Autowired
   private val authenticationManager: AuthenticationManager
 ): BasicAuthenticationFilter(authenticationManager) {
 
@@ -60,5 +62,5 @@ class JWTAuthorizationFilter(
       UsernamePasswordAuthenticationToken(user, null, ArrayList<GrantedAuthority>())
     }
   }
-
+  override fun getAuthenticationManager(): AuthenticationManager = super.getAuthenticationManager()
 }

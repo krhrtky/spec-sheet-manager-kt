@@ -1,4 +1,4 @@
-package com.example.specsheetmanager.controller.web.form
+package com.example.specsheetmanager.form.web
 
 import org.springframework.format.annotation.DateTimeFormat
 import java.util.*

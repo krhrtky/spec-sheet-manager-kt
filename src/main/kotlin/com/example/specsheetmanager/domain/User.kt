@@ -1,6 +1,6 @@
 package com.example.specsheetmanager.domain
 
-import com.example.specsheetmanager.controller.web.form.CreateUserForm
+import com.example.specsheetmanager.form.web.CreateUserForm
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils.createAuthorityList
 import org.springframework.security.core.userdetails.UserDetails

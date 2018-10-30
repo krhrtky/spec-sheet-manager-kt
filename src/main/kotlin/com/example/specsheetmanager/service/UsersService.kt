@@ -1,8 +1,8 @@
 package com.example.specsheetmanager.service
 
-import com.example.specsheetmanager.controller.web.form.CreateUserForm
-import com.example.specsheetmanager.controller.web.form.EditUserForm
 import com.example.specsheetmanager.domain.User
+import com.example.specsheetmanager.form.web.CreateUserForm
+import com.example.specsheetmanager.form.web.EditUserForm
 import com.example.specsheetmanager.repository.UserRepository
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired

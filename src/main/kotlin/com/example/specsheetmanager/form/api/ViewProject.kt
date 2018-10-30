@@ -1,19 +1,20 @@
-package com.example.specsheetmanager.controller.web.form
+package com.example.specsheetmanager.form.api
 
-import org.springframework.format.annotation.DateTimeFormat
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.util.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
-data class EditProjectForm(
+data class ViewProject(
   @get:NotNull
   var id: Int? = null,
   @get:NotBlank
   var name: String? = null,
   @NotNull
-  @DateTimeFormat(pattern = "yyyy/MM/dd")
+  @JsonFormat(pattern = "yyyy-MM", timezone = "Asia/Tokyo")
   var startDate: Date? = null,
   @NotNull
+  @JsonFormat(pattern = "yyyy-MM", timezone = "Asia/Tokyo")
   var endDate: Date? = null,
   @get:NotBlank
   var language: String? = null,
@@ -24,4 +25,3 @@ data class EditProjectForm(
   @get:NotBlank
   var about: String? = null
 )
-

@@ -1,8 +1,8 @@
 package com.example.specsheetmanager.controller.web
 
-import com.example.specsheetmanager.controller.web.form.AddProjectForm
-import com.example.specsheetmanager.controller.web.form.EditProjectForm
-import com.example.specsheetmanager.controller.web.form.PrintTargetProjectForm
+import com.example.specsheetmanager.form.web.AddProjectForm
+import com.example.specsheetmanager.form.web.EditProjectForm
+import com.example.specsheetmanager.form.web.PrintTargetProjectForm
 import com.example.specsheetmanager.service.ProjectService
 import com.example.specsheetmanager.util.getSessionUser
 import org.springframework.beans.factory.annotation.Autowired

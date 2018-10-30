@@ -1,7 +1,7 @@
 package com.example.specsheetmanager.filter
 
-import com.example.specsheetmanager.controller.web.form.LoginForm
 import com.example.specsheetmanager.domain.User
+import com.example.specsheetmanager.form.web.LoginForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -57,7 +57,6 @@ class JWTAuthenticationFilter(
 
     val user = authResult!!.principal as User
     val expiredDate = Date(System.currentTimeMillis() + 604800000/*1週間 */)
-    val key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
 
     //TODO: キー外部ファイル化
     val token = Jwts
