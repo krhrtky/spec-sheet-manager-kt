@@ -19,6 +19,15 @@ class ProjectService(
     false
   }
 
+  fun insertProject(project: Project)= try {
+    projectRepository.save(project)
+    true
+
+  } catch (e: Exception) {
+    e.printStackTrace()
+    false
+  }
+
   fun findProjectList(userId: Int) = projectRepository.findByUserId(userId)
 
   fun findByUserIdProjectId(userId: Int, projectId: Int) = projectRepository.findByUserIdAndId(userId, projectId)
@@ -32,8 +41,14 @@ class ProjectService(
     false
   }
 
-  //TODO: エラーハンドリングの実装.
-  fun editProject(project: Project) = projectRepository.save(project)
+  fun editProject(project: Project) = try {
+    projectRepository.save(project)
+    true
+
+  } catch (e: Exception) {
+    e.printStackTrace()
+    false
+  }
 
   fun findByUserIdAndIdIn(userId:Int, id: List<Int>) = projectRepository.findByUserIdAndIdIn(userId, id)
 }
