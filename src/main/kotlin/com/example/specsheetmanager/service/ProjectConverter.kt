@@ -26,7 +26,6 @@ class ProjectConverter {
     .toList()
 
   fun convertForEntityWith(viewProject: ViewProject, userId: Int) = Project(
-    id = viewProject.id,
     name = viewProject.name!!,
     startDate = viewProject.startDate!!,
     endDate = viewProject.endDate!!,

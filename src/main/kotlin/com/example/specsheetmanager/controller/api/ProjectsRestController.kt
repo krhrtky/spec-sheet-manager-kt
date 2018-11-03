@@ -1,5 +1,6 @@
 package com.example.specsheetmanager.controller.api
 
+import com.example.specsheetmanager.form.api.CreateProject
 import com.example.specsheetmanager.form.api.ViewProject
 import com.example.specsheetmanager.service.ProjectConverter
 import com.example.specsheetmanager.service.ProjectService
@@ -32,11 +33,11 @@ class ProjectsRestController(
   fun createProject(
     @RequestBody
     @Validated
-    form: ViewProject
+    form: CreateProject
   ): ResponseEntity<ViewProject> {
 
     val user = getSessionUser()
-    val project = projectConverter.convertForEntityWith(form, user!!.id!!)
+    val project = projectConverter.convertForCreateWith(form, user!!.id!!)
 
     return if (projectService.insertProject(project))
       ResponseEntity(HttpStatus.NO_CONTENT)
